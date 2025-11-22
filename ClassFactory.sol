@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.2 <0.9.0;
 
-contract ClassContract;
-
 contract ClassFactory {
 
     address private professor;
@@ -43,7 +41,7 @@ contract ClassContract {
     struct AttendanceRecord {
         //(stores history if Present or Not + timestamp) mapping(student => AttendanceRecord[]) records mapping(student => int merit) meritScore
         uint sessionNo;
-        string status; // present, absent and shit
+        string status; // present, absent and stuff
         uint timestamp;
     }
 
@@ -63,7 +61,6 @@ contract ClassContract {
     string public name;
     uint public scholarshipMinimum;
     address public professor;
-    address public organizer;
 
     struct SessionConfig{
         uint startTime;
@@ -78,7 +75,6 @@ contract ClassContract {
         name = _name;
         scholarshipMinimum = _scholarshipMinimum;
         professor = _professor;
-        organizer = _professor;
     }
 
     modifier isProfessor() {
@@ -87,7 +83,7 @@ contract ClassContract {
     }
 
     modifier isStudent() {
-        require(msg.sender == organizer, "You are not a Student.");
+        require(msg.sender != professor, "You are not a Student.");
         _;
     }
 
